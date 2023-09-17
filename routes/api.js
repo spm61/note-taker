@@ -28,7 +28,7 @@ module.exports = (app) => {
       id: uniqid(),
     };
     //Push the data and write it to the file.
-    db.push(newNote);
+    dbFile.push(newNote);
     fs.writeFileSync('db/db.json', JSON.stringify(dbFile));
     res.json(dbFile);
 
@@ -44,6 +44,5 @@ module.exports = (app) => {
     //write the data to the file.
     fs.writeFileSync('db/db.json', JSON.stringify(deleteNotes));
     res.json(deletedNote);
-
   })
 };
