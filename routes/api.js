@@ -42,7 +42,7 @@ module.exports = (app) => {
     //Finding the note with the specified ID and remove it.
     let deletedNote = dbFile.filter(note=> note.id !== req.params.id);
     //write the data to the file.
-    fs.writeFileSync('db/db.json', JSON.stringify(deleteNotes));
+    fs.writeFileSync('db/db.json', JSON.stringify(deletedNote));
     res.json(deletedNote);
   })
 };
