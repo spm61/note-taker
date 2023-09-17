@@ -1,41 +1,49 @@
-//adding required dependencies.
-const path = require('path');
-const fs = require('fs');
-//define the route to be used.
-const api = require('express').Router();
-var uniqid = require('uniqid'); //enables the creation of unique Ids, which is always good.
 
-api.get('/api/notes', (req, res) => {
+//The dependencies we need.
+const path = require('path');
+const fs = require('fs')
+
+//A package used for creating unique Ids
+var uniqid = require('uniqid');
+
+// routing
+module.exports = (app) => {
+
+  // GET /api/notes should read the db.json file and return all saved notes as JSON.
+  app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../db/db.json'));
   });
 
-//Post request to recieve a new note.
-api.post('/api/notes', (req, res) => {
-let dbFile = fs.readFileSync('db/db.json');
-dbFile = JSON.parse(dbFile); //reads the file and then parses the JSON
-res.json(dbFile);
-//the Note's body.
-let newNote = {
-    title: req.body.title,
-    text: req.body.text,
-    //They need a unique Id.
-    id: uniqid(),
-};
+  // POST /api/notes should receive a new note to save on the request body, 
+  // add it to the db.json file, and then return the new note to the client. 
+  app.post('/api/notes', (req, res) => {
+    let dbFile = fs.readFileSync('db/db.json');
+    dbFile = JSON.parse(dbFile); //parse the json file.
+    res.json(dbFile);
+    //making the body of the note.
+    let newNote = {
+      title: req.body.title,
+      text: req.body.text,
+      //making a unique ID.
+      id: uniqid(),
+    };
+    //Push the data and write it to the file.
+    db.push(newNote);
+    fs.writeFileSync('db/db.json', JSON.stringify(dbFile));
+    res.json(dbFile);
 
-dbFile.push(newNote); //Add the note to the Json File
-fs.writeFileSync('db/db.json', JSON.stringify(dbFile)); //write the new data to the file and then pass it back.
-res.json(dbFile);
-});
+  });
 
-//delete a note by ID.  
-api.delete('/api/notes/:id', (req, res) => {
-    //Get the data back from the Json.
+
+  // DELETE a note by ID.
+  app.delete('/api/notes/:id', (req, res) => {
+    //Reading in the JSON
     let dbFile = JSON.parse(fs.readFileSync('db/db.json'))
-    //find the specified note and delete it.
-    let deletedNote = dbFile.filter(note => note.id !== req.params.id);
-    //Send the new data back to the file.
-    fs.writeFileSync('db/db.json', JSON.stringify(deletedNote));
-    res.json(deletedNote); 
-  })
+    //Finding the note with the specified ID and remove it.
+    let deletedNote = db.filter(note=> note.id !== req.params.id);
+    //write the data to the file.
+    fs.writeFileSync('db/db.json', JSON.stringify(deleteNotes));
+    res.json(deletedNote);
 
-module.exports = api; //export the module. 
+  })
+};
