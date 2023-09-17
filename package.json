@@ -1,0 +1,27 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "A simple note-taker app",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spm61/note-taker.git"
+  },
+  "keywords": [
+    "note",
+    "taker",
+    "express",
+    "node",
+    "js"
+  ],
+  "author": "Sean Moroney",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spm61/note-taker/issues"
+  },
+  "homepage": "https://github.com/spm61/note-taker#readme"
+}
