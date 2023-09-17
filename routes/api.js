@@ -35,8 +35,7 @@ api.delete('/api/notes/:id', (req, res) => {
     let deletedNote = dbFile.filter(note => note.id !== req.params.id);
     //Send the new data back to the file.
     fs.writeFileSync('db/db.json', JSON.stringify(deletedNote));
-    res.json(deletedNote);
-    
+    res.json(deletedNote); 
   })
 
 module.exports = api; //export the module. 
