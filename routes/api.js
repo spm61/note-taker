@@ -32,7 +32,7 @@ api.delete('/api/notes/:id', (req, res) => {
     //Get the data back from the Json.
     let dbFile = JSON.parse(fs.readFileSync('db/db.json'))
     //find the specified note and delete it.
-    let deletedNote = db.filter(note => note.id !== req.params.id);
+    let deletedNote = dbFile.filter(note => note.id !== req.params.id);
     //Send the new data back to the file.
     fs.writeFileSync('db/db.json', JSON.stringify(deletedNote));
     res.json(deletedNote);
