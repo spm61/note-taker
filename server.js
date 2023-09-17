@@ -10,8 +10,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()); //gotta parse JSON too.
 
 //Setting up possible route names, these will be defined in a seperate file.
-require('./routes/api')(app);
-require('./routes/html')(app);
+require('./routes/api');
+require('./routes/html');
 
 //Listen to the port so the server can run.
 app.listen(PORT, () => {
