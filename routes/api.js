@@ -19,7 +19,6 @@ module.exports = (app) => {
   app.post('/api/notes', (req, res) => {
     let dbFile = fs.readFileSync('db/db.json');
     dbFile = JSON.parse(dbFile); //parse the json file.
-    res.json(dbFile);
     //making the body of the note.
     let newNote = {
       title: req.body.title,
@@ -29,11 +28,9 @@ module.exports = (app) => {
     };
     //Push the data and write it to the file.
     dbFile.push(newNote);
-    fs.writeFileSync('db/db.json', JSON.stringify(dbFile));
     res.json(dbFile);
-
+    fs.writeFileSync('db/db.json', JSON.stringify(dbFile));
   });
-
 
   // DELETE a note by ID.
   app.delete('/api/notes/:id', (req, res) => {
